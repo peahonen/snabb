@@ -114,7 +114,7 @@ function VirtioPci:new(pciaddr)
 
    pci.unbind_device_from_linux (pciaddr)
 
-   o._bar = open_bar(pci.path(pciaddr..'/resource0'), virtio_pci_bar0)
+   o._bar = open_bar(pci.path(pci.qualified(pciaddr)..'/resource0'), virtio_pci_bar0)
 
    return o
 end
