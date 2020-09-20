@@ -147,7 +147,9 @@ function VirtioVirtq:get()
    if debug then assert(p ~= nil) end
    if debug then assert(physical(p.data) == desc.addr) end
    p.length = used.len
-   p = packet.shiftleft(p, pk_header_size)
+   if p.length > 0 then
+      p = packet.shiftleft(p, pk_header_size)
+   end
 
    self.last_used_idx = self.last_used_idx + 1
    desc.next = self.free_head
