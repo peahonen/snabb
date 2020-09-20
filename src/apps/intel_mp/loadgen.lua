@@ -18,6 +18,10 @@ local num_descriptors = 1024
 
 LoadGen = {}
 
+-- The `driver' variable is used as a reference to the driver class in
+-- order to interchangeably use NIC drivers.
+driver = LoadGen
+
 function LoadGen:new (pciaddress)
    local function new_driver(conf)
       conf = lib.parse(conf, intel_mp.Intel82599.config)

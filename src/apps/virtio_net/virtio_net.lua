@@ -18,6 +18,10 @@ local main       = require("core.main")
 VirtioNet = {}
 VirtioNet.__index = VirtioNet
 
+-- The `driver' variable is used as a reference to the driver class in
+-- order to interchangeably use NIC drivers.
+driver = VirtioNet
+
 local receive, transmit, nreadable = link.receive, link.transmit, link.nreadable
 
 function VirtioNet:new(args)
