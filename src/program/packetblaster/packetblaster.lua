@@ -37,7 +37,7 @@ function run_loadgen (c, patterns, opts)
          else
             config.app(c, name, Intel82599, {pciaddr = device.pciaddress})
          end
-         config.link(c, "source."..tostring(nics).."->"..name..".input")
+         config.link(c, "source."..tostring(nics).."->"..name.."."..pci.which_link_names(device.driver))
       end
    end
    assert(nics > 0, "<PCI> matches no suitable devices.")
