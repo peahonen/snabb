@@ -8,9 +8,10 @@ local lib       = require("core.lib")
 local pci       = require("lib.hardware.pci")
 local LoadGen   = require("apps.intel_mp.loadgen").LoadGen
 local Intel82599 = require("apps.intel_mp.intel_mp").Intel82599
+local VirtioNet = require("apps.virtio_net.virtio_net").VirtioNet
 
 local function is_device_suitable (pcidev, patterns)
-   if not pcidev.usable or not pcidev.driver:match('intel') then
+   if not pcidev.usable then
       return false
    end
    if #patterns == 0 then
@@ -35,7 +36,11 @@ function run_loadgen (c, patterns, opts)
          if use_loadgen then
             config.app(c, name, LoadGen, device.pciaddress)
          else
-            config.app(c, name, Intel82599, {pciaddr = device.pciaddress})
+            if device.driver == "apps.virtio_net.virtio_net" then
+               config.app(c, name, VirtioNet, {pciaddr = device.pciaddress})
+	    else
+               config.app(c, name, Intel82599, {pciaddr = device.pciaddress})
+	    end
          end
          config.link(c, "source."..tostring(nics).."->"..name.."."..pci.which_link_names(device.driver))
       end
