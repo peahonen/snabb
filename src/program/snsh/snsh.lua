@@ -80,7 +80,7 @@ function repl ()
       io.stdout:flush()
       line = io.stdin:read("*l")
       if line then
-         local status, err = pcall(eval_line)
+         local status, err = xpcall(eval_line, debug.traceback)
          if not status then
             io.stdout:write(("Error in %s\n"):format(err))
          end
