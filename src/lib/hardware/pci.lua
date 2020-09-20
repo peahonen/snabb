@@ -89,13 +89,17 @@ local cards = {
    ["0x1924"] =  {
       ["0x0903"] = {model = 'SFN7122F', driver = 'apps.solarflare.solarflare'}
    },
+   ["0x1af4"] = {
+      ["0x1000"] = {model = 'VirtioNet', driver = 'apps.virtio_net.virtio_net'},
+   },
 }
 
 local link_names = {
    ['apps.solarflare.solarflare'] = { "rx", "tx" },
    ['apps.intel_mp.intel_mp']     = { "input", "output" },
    ['apps.intel_avf.intel_avf']   = { "input", "output" },
-   ['apps.intel.intel_app']       = { "rx", "tx" }
+   ['apps.intel.intel_app']       = { "rx", "tx" },
+   ['apps.virtio_net.virtio_net']     = { "rx", "tx" },
 }
 
 -- Return the name of the Lua module that implements support for this device.
