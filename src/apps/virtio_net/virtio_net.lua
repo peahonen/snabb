@@ -33,6 +33,8 @@ end
 function VirtioNet:push()
    local dev = self.device
    local l = self.input.rx
+   assert(self.input)
+   assert(self.input.rx)
 
    dev:recycle_transmit_buffers()
 

@@ -209,7 +209,9 @@ end
 -- Move packet data to the left. This shortens the packet by dropping
 -- the header bytes at the front.
 function shiftleft (p, bytes)
-   assert(0 <= bytes and bytes <= p.length)
+   assert(0 <= bytes)
+   assert(p.length > 0)
+   assert(bytes <= p.length)
    local ptr = ffi.cast("char*", p)
    local len = p.length
    local headroom = get_headroom(ptr)
